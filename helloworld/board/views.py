@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 # from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import Board, Post, Topic
 from .forms import NewTopicForm
 
@@ -13,6 +14,7 @@ def board_topics(request, pk):
     return render(request, 'topics.html', {'board': board})
 # Create your views here.
 
+@login_required
 def new_topic(request, pk):
     board = get_object_or_404(Board, pk=pk)
 
